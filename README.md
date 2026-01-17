@@ -2,7 +2,7 @@
 
 Este proyecto es una refactorización avanzada de la `RedSocialMalasPracticas`, aplicando patrones de diseño **SOLID**, **Clean Architecture** y optimizaciones de rendimiento en Angular 17+.
 
-## 🚀 Optimizaciones Principales
+## Optimizaciones Principales
 
 ### 1. Arquitectura y Modularización (BP 1.1 - 2.1)
 - **Standalone Components:** Eliminación de módulos innecesarios para reducir el bundle inicial.
@@ -20,7 +20,7 @@ Este proyecto es una refactorización avanzada de la `RedSocialMalasPracticas`, 
 - **Control Flow (@for):** Uso de la nueva sintaxis con `track` para optimizar el renderizado del DOM.
 - **Debouncing:** Aplicación de `debounceTime` en búsquedas para proteger el hilo principal.
 
-## 📈 Comparativa de KPIs (App A vs App B)
+## Comparativa de KPIs (App A vs App B)
 
 | KPI | Malas Prácticas (A) | Buenas Prácticas (B) | Mejora |
 | :--- | :---: | :---: | :--- |
@@ -30,7 +30,3 @@ Este proyecto es una refactorización avanzada de la `RedSocialMalasPracticas`, 
 | **Avg Input Handler** | > 50ms | < 2ms | Interfaz fluida (60fps) |
 | **Cache Hit Ratio** | 0% | > 80% | Navegación instantánea |
 
-## Instalación
-```bash
-npm install
-ionic serve
