@@ -1,0 +1,76 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Detalle Post {{ postId }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  
+  @if (title) {
+    <ion-text color="primary">
+      <h2 class="ion-no-margin"><b>{{ title }}</b></h2>
+    </ion-text>
+  }
+
+  @if (error) {
+    <ion-badge color="danger">{{ error }}</ion-badge>
+  }
+
+  @if (loading) {
+    <div style="margin-top: 12px;">
+      <ion-list>
+        @for (i of [1,2,3]; track i) {
+          <ion-item>
+            <ion-label>
+              <ion-skeleton-text [animated]="true" style="width: 50%"></ion-skeleton-text>
+              <ion-skeleton-text [animated]="true" style="width: 80%"></ion-skeleton-text>
+            </ion-label>
+          </ion-item>
+        }
+      </ion-list>
+    </div>
+  }
+
+  <ion-list>
+    @for (c of comments; track c.id) {
+      <ion-item lines="full">
+        <ion-label class="ion-text-wrap">
+          <ion-text color="dark">
+            <b>{{ c.name }}</b>
+          </ion-text>
+          
+          <p>{{ c.email | lowercase }}</p> 
+          
+          <p>{{ c.body }}</p>
+        </ion-label>
+      </ion-item>
+    } @empty {
+      @if (!loading) {
+        <ion-item>
+          <ion-label>No hay comentarios disponibles.</ion-label>
+        </ion-item>
+      }
+    }
+  </ion-list>
+
+  <ion-card color="light" class="ion-margin-top">
+    <ion-card-content>
+      <ion-note>Render items: <b>{{ kpi.kpis().renderItems }}</b></ion-note><br />
+      <ion-note>Subs activas: <b>{{ kpi.kpis().activeSubscriptions }}</b></ion-note>
+    </ion-card-content>
+  </ion-card>
+
+  <div style="display:flex; gap: 10px; margin-top: 16px;">
+    <ion-button expand="block" fill="clear" (click)="back()">
+      <ion-icon name="arrow-back-outline" slot="start"></ion-icon>
+      Volver
+    </ion-button>
+    <ion-button expand="block" (click)="goSettings()">
+      Métricas
+    </ion-button>
+  </div>
+
+</ion-content>

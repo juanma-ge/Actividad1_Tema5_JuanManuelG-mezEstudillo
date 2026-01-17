@@ -1,0 +1,75 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>Social B (Buenas Prácticas)</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <ion-item lines="inset">
+    <ion-icon name="search-outline" slot="start"></ion-icon>
+    <ion-input
+      label="Buscar posts"
+      labelPlacement="floating"
+      placeholder="Ej: aut"
+      [value]="query()"
+      (ionInput)="onInput($event)">
+    </ion-input>
+  </ion-item>
+
+  @if (error()) {
+    <ion-card color="danger">
+      <ion-card-content>{{ error() }}</ion-card-content>
+    </ion-card>
+  }
+
+  @if (loading()) {
+    <ion-list>
+      @for (i of [1,2,3,4,5]; track i) {
+        <ion-item>
+          <ion-label>
+            <ion-skeleton-text [animated]="true" style="width: 30%"></ion-skeleton-text>
+            <ion-skeleton-text [animated]="true" style="width: 70%"></ion-skeleton-text>
+          </ion-label>
+        </ion-item>
+      }
+    </ion-list>
+  }
+
+  <ion-list>
+    @for (p of filtered(); track p.id) {
+      <ion-item button (click)="openPost(p)" detail="true">
+        <ion-label class="ion-text-wrap">
+          <ion-text color="primary">
+            <h3><b>{{ p.title }}</b></h3>
+          </ion-text>
+          <p>{{ p.body }}</p>
+        </ion-label>
+      </ion-item>
+    } @empty {
+      @if (!loading()) {
+        <ion-item lines="none">
+          <ion-label class="ion-text-center">No se encontraron posts</ion-label>
+        </ion-item>
+      }
+    }
+  </ion-list>
+
+  <ion-card color="light" class="ion-margin-top">
+    <ion-item lines="none" color="light">
+      <ion-icon name="stats-chart-outline" slot="start"></ion-icon>
+      <ion-label>Métricas en tiempo real</ion-label>
+    </ion-item>
+    <ion-card-content>
+      <div class="kpi-grid">
+        <ion-note>Items en DOM: <b>{{ kpi.kpis().renderItems }}</b></ion-note>
+        <ion-note>Suscripciones: <b>{{ kpi.kpis().activeSubscriptions }}</b></ion-note>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-button expand="block" (click)="goSettings()" class="ion-margin-top">
+    Ir a panel de KPIs
+  </ion-button>
+
+</ion-content>
